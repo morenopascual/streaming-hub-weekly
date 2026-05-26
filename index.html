@@ -6,242 +6,50 @@
   <title>Editor · Streaming Hub Weekly</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    body {
-      margin: 0; padding: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f3f2f1;
-      color: #201f1e;
-    }
-    /* ─── CABECERA ─────────────────────── */
-    header {
-      background: #c8290e;
-      padding: 14px 28px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .logo {
-      width: 32px; height: 32px;
-      background: #fff;
-      border-radius: 4px;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 900; font-size: 17px; color: #c8290e;
-      flex-shrink: 0;
-    }
-    header h1 {
-      margin: 0; font-size: 17px; font-weight: 600; color: #fff;
-    }
-    header span {
-      margin-left: auto; font-size: 12px; color: rgba(255,255,255,0.7);
-    }
-    /* ─── CONTENEDOR ───────────────────── */
-    .container {
-      max-width: 760px;
-      margin: 28px auto;
-      padding: 0 16px 60px;
-    }
-    .intro {
-      background: #fff;
-      border-left: 4px solid #c8290e;
-      padding: 14px 18px;
-      border-radius: 2px;
-      margin-bottom: 24px;
-      font-size: 13px;
-      color: #605e5c;
-      line-height: 1.6;
-    }
-    /* ─── METADATOS ────────────────────── */
-    .meta-box {
-      background: #fff;
-      border: 1px solid #edebe9;
-      border-radius: 3px;
-      padding: 18px 20px;
-      margin-bottom: 20px;
-    }
-    .meta-box h2 {
-      margin: 0 0 14px 0;
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #605e5c;
-    }
-    .field-row {
-      display: flex; gap: 14px; flex-wrap: wrap;
-    }
-    .field {
-      display: flex; flex-direction: column; gap: 5px;
-      flex: 1; min-width: 180px;
-    }
+    body { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #f3f2f1; color: #201f1e; }
+    header { background: #c8290e; padding: 14px 28px; display: flex; align-items: center; gap: 12px; }
+    .logo { width: 32px; height: 32px; background: #fff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 17px; color: #c8290e; flex-shrink: 0; }
+    header h1 { margin: 0; font-size: 17px; font-weight: 600; color: #fff; }
+    header span { margin-left: auto; font-size: 12px; color: rgba(255,255,255,0.7); }
+    .container { max-width: 760px; margin: 28px auto; padding: 0 16px 60px; }
+    .intro { background: #fff; border-left: 4px solid #c8290e; padding: 14px 18px; border-radius: 2px; margin-bottom: 24px; font-size: 13px; color: #605e5c; line-height: 1.6; }
+    .meta-box { background: #fff; border: 1px solid #edebe9; border-radius: 3px; padding: 18px 20px; margin-bottom: 20px; }
+    .meta-box h2 { margin: 0 0 14px 0; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: #605e5c; }
+    .field-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .field { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 180px; }
     label { font-size: 12px; font-weight: 600; color: #605e5c; }
-    input[type="text"], input[type="date"], textarea {
-      border: 1px solid #d0ccc7;
-      border-radius: 2px;
-      padding: 7px 10px;
-      font-size: 13px;
-      font-family: inherit;
-      color: #201f1e;
-      background: #faf9f8;
-      transition: border-color 0.15s;
-      width: 100%;
-    }
-    input[type="text"]:focus, textarea:focus {
-      outline: none;
-      border-color: #c8290e;
-      background: #fff;
-    }
+    input[type="text"], input[type="date"], textarea { border: 1px solid #d0ccc7; border-radius: 2px; padding: 7px 10px; font-size: 13px; font-family: inherit; color: #201f1e; background: #faf9f8; transition: border-color 0.15s; width: 100%; }
+    input[type="text"]:focus, textarea:focus { outline: none; border-color: #c8290e; background: #fff; }
     textarea { resize: vertical; min-height: 64px; }
-    /* ─── ARTÍCULO CARD ────────────────── */
-    .article-card {
-      background: #fff;
-      border: 1px solid #edebe9;
-      border-radius: 3px;
-      margin-bottom: 14px;
-      overflow: hidden;
-    }
-    .article-header {
-      display: flex;
-      align-items: center;
-      padding: 12px 16px;
-      cursor: pointer;
-      user-select: none;
-      border-bottom: 1px solid #edebe9;
-      gap: 10px;
-    }
+    .article-card { background: #fff; border: 1px solid #edebe9; border-radius: 3px; margin-bottom: 14px; overflow: hidden; }
+    .article-header { display: flex; align-items: center; padding: 12px 16px; cursor: pointer; user-select: none; border-bottom: 1px solid #edebe9; gap: 10px; }
     .article-header:hover { background: #faf9f8; }
-    .article-num {
-      width: 26px; height: 26px;
-      background: #c8290e;
-      color: #fff;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700;
-      flex-shrink: 0;
-    }
-    .article-preview {
-      font-size: 13px; font-weight: 600;
-      flex: 1; color: #201f1e;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
+    .article-num { width: 26px; height: 26px; background: #c8290e; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .article-preview { font-size: 13px; font-weight: 600; flex: 1; color: #201f1e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .article-preview.empty { color: #a19f9d; font-weight: 400; font-style: italic; }
-    .toggle-icon {
-      font-size: 11px; color: #a19f9d;
-      transition: transform 0.2s;
-    }
-    .article-body {
-      padding: 18px 20px;
-      display: flex; flex-direction: column; gap: 12px;
-    }
+    .toggle-icon { font-size: 11px; color: #a19f9d; transition: transform 0.2s; }
+    .article-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
     .article-body.collapsed { display: none; }
-    .img-preview {
-      width: 80px; height: 54px;
-      object-fit: cover;
-      border: 1px solid #edebe9;
-      border-radius: 2px;
-      display: none;
-      margin-top: 4px;
-    }
-    /* ─── BOTONES ──────────────────────── */
-    .actions {
-      display: flex; gap: 12px; align-items: center;
-      margin: 24px 0 0 0; flex-wrap: wrap;
-    }
-    .btn-primary {
-      background: #c8290e; color: #fff;
-      border: none; border-radius: 2px;
-      padding: 10px 24px;
-      font-size: 14px; font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
+    .img-preview { width: 80px; height: 54px; object-fit: cover; border: 1px solid #edebe9; border-radius: 2px; display: none; margin-top: 4px; }
+    .actions { display: flex; gap: 12px; align-items: center; margin: 24px 0 0 0; flex-wrap: wrap; }
+    .btn-primary { background: #c8290e; color: #fff; border: none; border-radius: 2px; padding: 10px 24px; font-size: 14px; font-weight: 600; font-family: inherit; cursor: pointer; transition: background 0.15s; }
     .btn-primary:hover { background: #a82209; }
-    .btn-secondary {
-      background: #fff; color: #201f1e;
-      border: 1px solid #d0ccc7; border-radius: 2px;
-      padding: 9px 20px;
-      font-size: 13px; font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: border-color 0.15s;
-    }
+    .btn-secondary { background: #fff; color: #201f1e; border: 1px solid #d0ccc7; border-radius: 2px; padding: 9px 20px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; transition: border-color 0.15s; }
     .btn-secondary:hover { border-color: #a19f9d; }
-    /* ─── MODAL RESULTADO ──────────────── */
-    .overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.45);
-      z-index: 100;
-      align-items: center; justify-content: center;
-    }
+    .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 100; align-items: center; justify-content: center; }
     .overlay.open { display: flex; }
-    .modal {
-      background: #fff;
-      border-radius: 4px;
-      width: 90vw; max-width: 700px;
-      max-height: 85vh;
-      display: flex; flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    }
-    .modal-header {
-      padding: 16px 20px;
-      border-bottom: 1px solid #edebe9;
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    .modal { background: #fff; border-radius: 4px; width: 90vw; max-width: 700px; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    .modal-header { padding: 16px 20px; border-bottom: 1px solid #edebe9; display: flex; align-items: center; justify-content: space-between; }
     .modal-header h2 { margin: 0; font-size: 15px; }
-    .modal-close {
-      background: none; border: none;
-      font-size: 20px; cursor: pointer; color: #605e5c;
-      line-height: 1;
-    }
-    .modal-body {
-      flex: 1; overflow: auto;
-      padding: 16px 20px;
-    }
-    .code-area {
-      width: 100%; height: 320px;
-      font-family: 'Consolas', monospace;
-      font-size: 11px;
-      border: 1px solid #edebe9;
-      border-radius: 2px;
-      padding: 10px;
-      resize: vertical;
-      color: #201f1e;
-      background: #faf9f8;
-    }
-    .modal-footer {
-      padding: 14px 20px;
-      border-top: 1px solid #edebe9;
-      display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
-    }
-    .copy-ok {
-      font-size: 12px; color: #107c10;
-      display: none; font-weight: 600;
-    }
-    .add-article-btn {
-      background: none;
-      border: 1px dashed #c8290e;
-      color: #c8290e;
-      border-radius: 2px;
-      padding: 10px 20px;
-      font-size: 13px; font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      width: 100%;
-      margin-bottom: 0;
-      transition: background 0.15s;
-    }
+    .modal-close { background: none; border: none; font-size: 20px; cursor: pointer; color: #605e5c; line-height: 1; }
+    .modal-body { flex: 1; overflow: auto; padding: 16px 20px; }
+    .code-area { width: 100%; height: 320px; font-family: 'Consolas', monospace; font-size: 11px; border: 1px solid #edebe9; border-radius: 2px; padding: 10px; resize: vertical; color: #201f1e; background: #faf9f8; }
+    .modal-footer { padding: 14px 20px; border-top: 1px solid #edebe9; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .copy-ok { font-size: 12px; color: #107c10; display: none; font-weight: 600; }
+    .add-article-btn { background: none; border: 1px dashed #c8290e; color: #c8290e; border-radius: 2px; padding: 10px 20px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; width: 100%; margin-bottom: 0; transition: background 0.15s; }
     .add-article-btn:hover { background: #fdf2f0; }
-    .remove-btn {
-      align-self: flex-end;
-      background: none; border: none;
-      color: #a19f9d; font-size: 12px;
-      cursor: pointer; padding: 4px 0;
-      font-family: inherit;
-    }
+    .remove-btn { align-self: flex-end; background: none; border: none; color: #a19f9d; font-size: 12px; cursor: pointer; padding: 4px 0; font-family: inherit; }
     .remove-btn:hover { color: #c8290e; }
-    /* Editor ONE MORE THING */
     .omt-box { background:#fff; border:1px solid #edebe9; border-radius:3px; margin-top:20px; overflow:hidden; }
     .omt-box-header { background:#1a1a1a; padding:14px 18px; display:flex; align-items:center; gap:10px; }
     .omt-box-header span { font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#e05500; font-family:Arial,sans-serif; }
@@ -249,63 +57,34 @@
     .omt-tool { background:#faf9f8; border:1px solid #d0ccc7; border-radius:2px; padding:5px 10px; font-size:12px; font-weight:600; font-family:inherit; cursor:pointer; color:#605e5c; }
     .omt-tool:hover { border-color:#a19f9d; }
     .omt-tool.link-btn { color:#c8290e; border-color:#c8290e; }
-    .omt-editor {
-      min-height:90px; padding:14px 16px; font-size:14px; line-height:1.7;
-      color:#201f1e; font-family:'Segoe UI', Arial, sans-serif; outline:none;
-      border:none;
-    }
+    .omt-editor { min-height:90px; padding:14px 16px; font-size:14px; line-height:1.7; color:#201f1e; font-family:'Segoe UI', Arial, sans-serif; outline:none; border:none; }
     .omt-editor:empty:before { content:attr(data-placeholder); color:#a19f9d; pointer-events:none; }
     .omt-editor a { color:#e05500; }
-    /* Selector de tipo */
-    .type-toggle {
-      display: flex; gap: 0; margin-bottom: 4px;
-    }
-    .type-btn {
-      flex: 1; padding: 7px 10px; font-size: 12px; font-weight: 600;
-      font-family: inherit; cursor: pointer; border: 1px solid #d0ccc7;
-      background: #faf9f8; color: #605e5c; transition: all 0.15s;
-    }
+    .type-toggle { display: flex; gap: 0; margin-bottom: 4px; }
+    .type-btn { flex: 1; padding: 7px 10px; font-size: 12px; font-weight: 600; font-family: inherit; cursor: pointer; border: 1px solid #d0ccc7; background: #faf9f8; color: #605e5c; transition: all 0.15s; }
     .type-btn:first-child { border-radius: 2px 0 0 2px; }
     .type-btn:last-child  { border-radius: 0 2px 2px 0; border-left: none; }
     .type-btn.active { background: #c8290e; color: #fff; border-color: #c8290e; }
   </style>
 </head>
 <body>
-
 <header>
   <div class="logo">S</div>
   <h1>Streaming Hub Weekly — Editor</h1>
   <span id="today-date"></span>
 </header>
-
 <div class="container">
-
-  <div class="intro">
-    Rellena los campos de cada noticia y pulsa <strong>Generar newsletter</strong>. Obtendrás el HTML listo para pegar en tu herramienta de envío o en un correo.
-  </div>
-
-  <!-- Metadatos -->
+  <div class="intro">Rellena los campos de cada noticia y pulsa <strong>Generar newsletter</strong>. Obtendrás el HTML listo para pegar en tu herramienta de envío o en un correo.</div>
   <div class="meta-box">
     <h2>Datos del boletín</h2>
     <div class="field-row">
-      <div class="field">
-        <label for="nl-title">Título del boletín</label>
-        <input type="text" id="nl-title" value="Streaming Hub Weekly">
-      </div>
-      <div class="field">
-        <label for="nl-date">Fecha</label>
-        <input type="date" id="nl-date">
-      </div>
+      <div class="field"><label for="nl-title">Título del boletín</label><input type="text" id="nl-title" value="Streaming Hub Weekly"></div>
+      <div class="field"><label for="nl-date">Fecha</label><input type="date" id="nl-date"></div>
     </div>
-
-    <!-- Imagen de cabecera -->
     <div class="field" style="margin-top:12px;">
       <label>Imagen de cabecera <span style="font-weight:400; color:#a19f9d;">(opcional — reemplaza la barra roja)</span></label>
       <div style="display:flex; gap:8px; align-items:flex-start; flex-wrap:wrap;">
-        <label for="header-imgfile" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; background:#faf9f8; border:1px solid #d0ccc7; border-radius:2px; padding:7px 12px; font-size:12px; font-weight:600; color:#605e5c; white-space:nowrap; flex-shrink:0;">
-          📁 Subir imagen de cabecera
-          <input type="file" id="header-imgfile" accept="image/*" style="display:none" onchange="loadHeaderImg()">
-        </label>
+        <label for="header-imgfile" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; background:#faf9f8; border:1px solid #d0ccc7; border-radius:2px; padding:7px 12px; font-size:12px; font-weight:600; color:#605e5c; white-space:nowrap; flex-shrink:0;">📁 Subir imagen de cabecera<input type="file" id="header-imgfile" accept="image/*" style="display:none" onchange="loadHeaderImg()"></label>
         <button class="btn-secondary" onclick="clearHeaderImg()" style="padding:7px 12px; font-size:12px;">✕ Quitar</button>
       </div>
       <div id="header-preview-wrap" style="display:none; margin-top:8px;">
@@ -313,20 +92,13 @@
         <span id="header-imgname" style="display:block; font-size:11px; color:#107c10; margin-top:4px;"></span>
       </div>
     </div>
-
-    <!-- Intro -->
     <div class="field" style="margin-top:12px;">
       <label for="nl-intro">Párrafo de introducción <span style="font-weight:400; color:#a19f9d;">(opcional)</span></label>
       <textarea id="nl-intro" placeholder="Escribe aquí el texto introductorio de la semana…" style="min-height:80px;">Semana de presentaciones, promesas y mucho PowerPoint caro. Netflix, Disney, YouTube y Prime Video enseñaron músculo en sus upfronts, y Google convirtió Gemini en protagonista de su evento I/O. Mientras, HBO presentó podcasts, TikTok muestra alguna señal de saturación y seguimos buscando respuestas a la caída generalizada de tráfico.</textarea>
     </div>
   </div>
-
-  <!-- Lista de artículos -->
   <div id="articles-list"></div>
-
   <button class="add-article-btn" onclick="addArticle()">+ Añadir otro bloque</button>
-
-  <!-- ONE MORE THING -->
   <div class="omt-box">
     <div class="omt-box-header">
       <span>One more thing...</span>
@@ -338,29 +110,20 @@
       <button class="omt-tool link-btn" onclick="omtAddLink()">🔗 Añadir enlace</button>
       <button class="omt-tool" onclick="omtRemoveLink()" style="font-size:11px;">✕ Quitar enlace</button>
     </div>
-    <div id="omt-editor" class="omt-editor" contenteditable="true"
-      data-placeholder="Selecciona texto y usa los botones para añadir enlaces. Ej: Y por último, os dejo con este artículo que vale la pena leer…"></div>
+    <div id="omt-editor" class="omt-editor" contenteditable="true" data-placeholder="Selecciona texto y usa los botones para añadir enlaces. Ej: Y por último, os dejo con este artículo que vale la pena leer…"></div>
   </div>
-
   <div class="actions">
     <button class="btn-primary" onclick="generateNewsletter()">Generar newsletter</button>
     <button class="btn-secondary" onclick="downloadNewsletter()">Descargar .html</button>
     <button class="btn-secondary" onclick="downloadBat()" title="Descarga el script que abre el newsletter directamente en Outlook sin copiar/pegar">📧 Descargar script Outlook</button>
   </div>
   <div style="font-size:12px; color:#a19f9d; margin-top:10px; line-height:1.6; padding:0 2px;">
-    <strong style="color:#605e5c;">Flujo recomendado para Outlook:</strong>
-    1. Descarga el .html · 2. Descarga el script Outlook (solo la primera vez) · 3. Pon ambos en la misma carpeta · 4. Doble clic en el script → se abre el borrador listo en Outlook
+    <strong style="color:#605e5c;">Flujo recomendado para Outlook:</strong> 1. Descarga el .html · 2. Descarga el script Outlook (solo la primera vez) · 3. Pon ambos en la misma carpeta · 4. Doble clic en el script → se abre el borrador listo en Outlook
   </div>
-
 </div>
-
-<!-- Modal con el HTML generado -->
 <div class="overlay" id="result-overlay">
   <div class="modal">
-    <div class="modal-header">
-      <h2>Newsletter generado</h2>
-      <button class="modal-close" onclick="closeModal()">×</button>
-    </div>
+    <div class="modal-header"><h2>Newsletter generado</h2><button class="modal-close" onclick="closeModal()">×</button></div>
     <div class="modal-body">
       <p style="font-size:13px; color:#605e5c; margin:0 0 10px 0;">Copia este HTML y pégalo en tu plataforma de envío (Outlook, Mailchimp, etc.).</p>
       <textarea class="code-area" id="result-code" readonly></textarea>
@@ -372,94 +135,40 @@
     </div>
   </div>
 </div>
-
 <script>
-// ─── Estado inicial ────────────────────────────────────────────────
 const INITIAL_ARTICLES = [
-  {
-    title: "Channel 4 acelera en streaming mientras la TV publicitaria se enfría en Reino Unido",
-    desc: "Channel 4 volvió a superar los 1.000 millones de libras en ingresos en 2025, pero los resultados del broadcaster británico reflejan sobre todo una idea: el futuro del grupo pasa ya claramente por el streaming y los ingresos digitales.",
-    url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/Channel-4-acelera-en-streaming-mientras-la-TV-publicitaria-se-enfr%C3%ADa-en-Reino-Unido.aspx",
-    img: "", age: "hace 3 días"
-  },
-  {
-    title: "Netflix incorporará 20 series de la televisión pública japonesa NHK a su catálogo internacional desde junio",
-    desc: "Netflix suma 20 series emblemáticas de NHK a su catálogo internacional, incluyendo dramas históricos y contemporáneos, ampliando la oferta japonesa y fortaleciendo alianzas con broadcasters locales para audiencias globales.",
-    url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/Netflix-incorporar%C3%A1-20-series-de-la-televisi%C3%B3n-p%C3%BAblica-japonesa-NHK-a-su-cat%C3%A1logo-internacional-desde-junio.aspx",
-    img: "", age: "hace 3 días"
-  },
-  {
-    title: "Google I/O 2026: Gemini es ahora el centro de Search, YouTube, Workspace y la creación audiovisual",
-    desc: "Google I/O 2026 ha sido el evento en el que Google ha dejado claro que la IA ya no será una capa añadida a sus productos, sino el tejido que conectará Search, YouTube, Workspace, Android, Chrome, compras, diseño, vídeo y hardware.",
-    url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/Google-I-O-2026--Gemini-es-ahora-el-centro-de-Search%2C-YouTube%2C-Workspace-y-la-creaci%C3%B3n-audiovisual.aspx",
-    img: "", age: "hace 5 días"
-  },
-  {
-    title: "Los bundles ganan peso ante la subida de precios: el consumidor busca ahorrar y simplificar",
-    desc: "Según el informe Best Bundle 2026 de Hub Entertainment Research, los paquetes de suscripción ya no son solo una fórmula promocional: el bundle vuelve a ocupar el centro de la estrategia del streaming.",
-    url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/Los-bundles-ganan-peso-ante-la-subida-de-precios--el-consumidor-busca-ahorrar-y-simplificar.aspx",
-    img: "", age: "hace 5 días"
-  },
-  {
-    title: "HBO Max integra podcasts oficiales en Europa para reforzar sus grandes franquicias",
-    desc: "HBO Max lanza podcasts oficiales en Europa, comenzando con Harry Potter y Game of Thrones, para ofrecer nuevas formas de explorar sus franquicias favoritas y reforzar el engagement en la plataforma.",
-    url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/HBO-Max-integra-podcasts-oficiales-en-Europa-para-reforzar-sus-grandes-franquicias.aspx",
-    img: "", age: "hace 5 días"
-  },
-  {
-    title: "20 señales de que los medios han entrado en la era posterior al tráfico prestado",
-    desc: "Durante años, buena parte de las redacciones digitales trabajaron sobre una premisa razonable: si se producía contenido de calidad, las plataformas lo distribuirían. Esa era ha llegado a su fin.",
-    url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/20-se%C3%B1ales-de-que-los-medios-han-entrado-en-la-era-posterior-al-tr%C3%A1fico-prestado.aspx",
-    img: "", age: "hace 5 días"
-  },
-  {
-    title: "De los Sidemen a CazéTV: YouTube y la nueva tele",
-    desc: "Durante años, YouTube fue para la televisión territorio secundario: herramienta de promoción, archivo de clips o vía para llegar a audiencias jóvenes. Esa etapa ha evolucionado profundamente.",
-    url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/De-los-Sidemen-a-Caz%C3%A9TV--YouTube-y-la-nueva-tele.aspx",
-    img: "", age: "hace 6 días"
-  },
-  {
-    title: "TikTok dominando el vídeo corto, pero parece entrar en fase de saturación",
-    desc: "TikTok mantiene su posición como plataforma líder en vídeo breve, pero el Estudio de TikTok 2026 de Metricool advierte: el crecimiento del ecosistema ya no garantiza visibilidad para los creadores.",
-    url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/TikTok-dominando-el-v%C3%ADdeo-corto%2C-pero-parece-entrar-en-fase-de-saturaci%C3%B3n.aspx",
-    img: "", age: "hace 7 días"
-  }
+  { title: "Channel 4 acelera en streaming mientras la TV publicitaria se enfría en Reino Unido", desc: "Channel 4 volvió a superar los 1.000 millones de libras en ingresos en 2025, pero los resultados del broadcaster británico reflejan sobre todo una idea: el futuro del grupo pasa ya claramente por el streaming y los ingresos digitales.", url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/Channel-4-acelera-en-streaming-mientras-la-TV-publicitaria-se-enfr%C3%ADa-en-Reino-Unido.aspx", img: "", age: "hace 3 días" },
+  { title: "Netflix incorporará 20 series de la televisión pública japonesa NHK a su catálogo internacional desde junio", desc: "Netflix suma 20 series emblemáticas de NHK a su catálogo internacional, incluyendo dramas históricos y contemporáneos, ampliando la oferta japonesa y fortaleciendo alianzas con broadcasters locales para audiencias globales.", url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/Netflix-incorporar%C3%A1-20-series-de-la-televisi%C3%B3n-p%C3%BAblica-japonesa-NHK-a-su-cat%C3%A1logo-internacional-desde-junio.aspx", img: "", age: "hace 3 días" },
+  { title: "Google I/O 2026: Gemini es ahora el centro de Search, YouTube, Workspace y la creación audiovisual", desc: "Google I/O 2026 ha sido el evento en el que Google ha dejado claro que la IA ya no será una capa añadida a sus productos, sino el tejido que conectará Search, YouTube, Workspace, Android, Chrome, compras, diseño, vídeo y hardware.", url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/Google-I-O-2026--Gemini-es-ahora-el-centro-de-Search%2C-YouTube%2C-Workspace-y-la-creaci%C3%B3n-audiovisual.aspx", img: "", age: "hace 5 días" },
+  { title: "Los bundles ganan peso ante la subida de precios: el consumidor busca ahorrar y simplificar", desc: "Según el informe Best Bundle 2026 de Hub Entertainment Research, los paquetes de suscripción ya no son solo una fórmula promocional: el bundle vuelve a ocupar el centro de la estrategia del streaming.", url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/Los-bundles-ganan-peso-ante-la-subida-de-precios--el-consumidor-busca-ahorrar-y-simplificar.aspx", img: "", age: "hace 5 días" },
+  { title: "HBO Max integra podcasts oficiales en Europa para reforzar sus grandes franquicias", desc: "HBO Max lanza podcasts oficiales en Europa, comenzando con Harry Potter y Game of Thrones, para ofrecer nuevas formas de explorar sus franquicias favoritas y reforzar el engagement en la plataforma.", url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/HBO-Max-integra-podcasts-oficiales-en-Europa-para-reforzar-sus-grandes-franquicias.aspx", img: "", age: "hace 5 días" },
+  { title: "20 señales de que los medios han entrado en la era posterior al tráfico prestado", desc: "Durante años, buena parte de las redacciones digitales trabajaron sobre una premisa razonable: si se producía contenido de calidad, las plataformas lo distribuirían. Esa era ha llegado a su fin.", url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/20-se%C3%B1ales-de-que-los-medios-han-entrado-en-la-era-posterior-al-tr%C3%A1fico-prestado.aspx", img: "", age: "hace 5 días" },
+  { title: "De los Sidemen a CazéTV: YouTube y la nueva tele", desc: "Durante años, YouTube fue para la televisión territorio secundario: herramienta de promoción, archivo de clips o vía para llegar a audiencias jóvenes. Esa etapa ha evolucionado profundamente.", url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/De-los-Sidemen-a-Caz%C3%A9TV--YouTube-y-la-nueva-tele.aspx", img: "", age: "hace 6 días" },
+  { title: "TikTok dominando el vídeo corto, pero parece entrar en fase de saturación", desc: "TikTok mantiene su posición como plataforma líder en vídeo breve, pero el Estudio de TikTok 2026 de Metricool advierte: el crecimiento del ecosistema ya no garantiza visibilidad para los creadores.", url: "https://atresmedia.sharepoint.com/sites/StreamingHub/SitePages/TikTok-dominando-el-v%C3%ADdeo-corto%2C-pero-parece-entrar-en-fase-de-saturaci%C3%B3n.aspx", img: "", age: "hace 7 días" }
 ];
-
 let articleCount = 0;
-
-// Fecha de hoy
 (function() {
   const d = new Date();
-  document.getElementById('today-date').textContent =
-    d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  document.getElementById('today-date').textContent = d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
   document.getElementById('nl-date').valueAsDate = d;
 })();
-
-// ─── Renderizar artículos iniciales ───────────────────────────────
 INITIAL_ARTICLES.forEach(a => addArticle(a));
-
 function addArticle(data) {
   articleCount++;
   const n = articleCount;
   const d = data || { type:'noticia', title:'', desc:'', url:'', img:'', age:'' };
   const type = d.type || 'noticia';
   const list = document.getElementById('articles-list');
-
   const card = document.createElement('div');
   card.className = 'article-card';
   card.id = `card-${n}`;
   card.innerHTML = `
     <div class="article-header" onclick="toggleCard(${n})">
       <div class="article-num">${n}</div>
-      <div class="article-preview ${d.title ? '' : 'empty'}" id="preview-${n}">
-        ${type === 'banner' ? '🖼 Imagen a todo el ancho' : (d.title || 'Nueva noticia…')}
-      </div>
+      <div class="article-preview ${d.title ? '' : 'empty'}" id="preview-${n}">${type === 'banner' ? '🖼 Imagen a todo el ancho' : (d.title || 'Nueva noticia…')}</div>
       <span class="toggle-icon" id="icon-${n}">▼</span>
     </div>
     <div class="article-body ${n > 3 ? 'collapsed' : ''}" id="body-${n}">
-
-      <!-- Selector de tipo -->
       <div class="field">
         <label>Tipo de bloque</label>
         <div class="type-toggle">
@@ -467,521 +176,160 @@ function addArticle(data) {
           <button class="type-btn ${type === 'banner' ? 'active' : ''}" id="typebtn-banner-${n}" onclick="setType(${n},'banner')">🖼 Imagen a todo el ancho</button>
         </div>
       </div>
-
-      <!-- Campos solo para noticia -->
       <div id="fields-noticia-${n}" style="${type === 'banner' ? 'display:none' : ''}">
-        <div class="field">
-          <label>Título *</label>
-          <input type="text" id="title-${n}" value="${esc(d.title)}" placeholder="Título de la noticia"
-            oninput="updatePreview(${n})">
-        </div>
-        <div class="field">
-          <label>Descripción *</label>
-          <textarea id="desc-${n}" placeholder="Resumen breve (2-3 líneas)">${esc(d.desc)}</textarea>
-        </div>
-        <div class="field">
-          <label>URL del artículo *</label>
-          <input type="text" id="url-${n}" value="${esc(d.url)}" placeholder="https://…">
-        </div>
+        <div class="field"><label>Título *</label><input type="text" id="title-${n}" value="${esc(d.title)}" placeholder="Título de la noticia" oninput="updatePreview(${n})"></div>
+        <div class="field"><label>Descripción *</label><textarea id="desc-${n}" placeholder="Resumen breve (2-3 líneas)">${esc(d.desc)}</textarea></div>
+        <div class="field"><label>URL del artículo *</label><input type="text" id="url-${n}" value="${esc(d.url)}" placeholder="https://…"></div>
       </div>
-
-      <!-- Imagen (aplica a ambos tipos) -->
       <div class="field">
         <label id="imglabel-${n}">${type === 'banner' ? 'Imagen *' : 'Imagen'}</label>
         <div style="display:flex; gap:8px; align-items:flex-start; flex-wrap:wrap;">
-          <label for="imgfile-${n}" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; background:#faf9f8; border:1px solid #d0ccc7; border-radius:2px; padding:7px 12px; font-size:12px; font-weight:600; color:#605e5c; white-space:nowrap; flex-shrink:0;">
-            📁 Subir imagen
-            <input type="file" id="imgfile-${n}" accept="image/*" style="display:none" onchange="loadImgFile(${n})">
-          </label>
-          <input type="text" id="img-${n}" value="${esc(d.img)}" placeholder="o pega una URL https://…"
-            oninput="previewImg(${n})" style="flex:1; min-width:120px;">
+          <label for="imgfile-${n}" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; background:#faf9f8; border:1px solid #d0ccc7; border-radius:2px; padding:7px 12px; font-size:12px; font-weight:600; color:#605e5c; white-space:nowrap; flex-shrink:0;">📁 Subir imagen<input type="file" id="imgfile-${n}" accept="image/*" style="display:none" onchange="loadImgFile(${n})"></label>
+          <input type="text" id="img-${n}" value="${esc(d.img)}" placeholder="o pega una URL https://…" oninput="previewImg(${n})" style="flex:1; min-width:120px;">
         </div>
         <img id="imgprev-${n}" class="img-preview" src="" alt="">
         <span id="imgname-${n}" style="font-size:11px; color:#107c10; display:none;"></span>
       </div>
-
-      <!-- Antigüedad solo para noticia -->
       <div class="field" id="fields-age-${n}" style="${type === 'banner' ? 'display:none' : ''}">
         <label>Antigüedad</label>
         <input type="text" id="age-${n}" value="${esc(d.age)}" placeholder="ej. hace 2 días">
       </div>
-
       <button class="remove-btn" onclick="removeCard(${n})">Eliminar este bloque</button>
     </div>
   `;
   list.appendChild(card);
-
   if (d.img) previewImg(n);
 }
-
 function setType(n, type) {
-  // Botones
   document.getElementById(`typebtn-noticia-${n}`).classList.toggle('active', type === 'noticia');
   document.getElementById(`typebtn-banner-${n}`).classList.toggle('active', type === 'banner');
-  // Campos
   document.getElementById(`fields-noticia-${n}`).style.display = type === 'banner' ? 'none' : '';
-  document.getElementById(`fields-age-${n}`).style.display    = type === 'banner' ? 'none' : '';
+  document.getElementById(`fields-age-${n}`).style.display = type === 'banner' ? 'none' : '';
   document.getElementById(`imglabel-${n}`).textContent = type === 'banner' ? 'Imagen *' : 'Imagen';
-  // Preview cabecera
   const prev = document.getElementById(`preview-${n}`);
-  if (type === 'banner') {
-    prev.textContent = '🖼 Imagen a todo el ancho';
-    prev.classList.remove('empty');
-  } else {
-    const t = (document.getElementById(`title-${n}`) || {}).value || '';
-    prev.textContent = t || 'Nueva noticia…';
-    prev.className = 'article-preview' + (t ? '' : ' empty');
-  }
-  // Guardar tipo en dataset
+  if (type === 'banner') { prev.textContent = '🖼 Imagen a todo el ancho'; prev.classList.remove('empty'); }
+  else { const t = (document.getElementById(`title-${n}`) || {}).value || ''; prev.textContent = t || 'Nueva noticia…'; prev.className = 'article-preview' + (t ? '' : ' empty'); }
   document.getElementById(`card-${n}`).dataset.type = type;
 }
-
-// ─── Imagen de cabecera ────────────────────────────────────────────
 let headerImgBase64 = '';
-
 function loadHeaderImg() {
   const file = document.getElementById('header-imgfile').files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = function(e) {
-    headerImgBase64 = e.target.result;
-    document.getElementById('header-imgprev').src = e.target.result;
-    document.getElementById('header-imgname').textContent = '✓ ' + file.name;
-    document.getElementById('header-preview-wrap').style.display = 'block';
-  };
+  reader.onload = function(e) { headerImgBase64 = e.target.result; document.getElementById('header-imgprev').src = e.target.result; document.getElementById('header-imgname').textContent = '✓ ' + file.name; document.getElementById('header-preview-wrap').style.display = 'block'; };
   reader.readAsDataURL(file);
 }
-
-function clearHeaderImg() {
-  headerImgBase64 = '';
-  document.getElementById('header-imgfile').value = '';
-  document.getElementById('header-preview-wrap').style.display = 'none';
-}
-
-// Almacén de base64 por artículo
+function clearHeaderImg() { headerImgBase64 = ''; document.getElementById('header-imgfile').value = ''; document.getElementById('header-preview-wrap').style.display = 'none'; }
 const imgBase64 = {};
-
 function loadImgFile(n) {
   const file = document.getElementById(`imgfile-${n}`).files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = function(e) {
-    imgBase64[n] = e.target.result; // data:image/...;base64,...
-    // Preview
-    const prev = document.getElementById(`imgprev-${n}`);
-    prev.src = e.target.result;
-    prev.style.display = 'block';
-    // Limpiar URL manual si había
-    document.getElementById(`img-${n}`).value = '';
-    // Nombre del archivo
-    const nm = document.getElementById(`imgname-${n}`);
-    nm.textContent = '✓ ' + file.name;
-    nm.style.display = 'inline';
-  };
+  reader.onload = function(e) { imgBase64[n] = e.target.result; const prev = document.getElementById(`imgprev-${n}`); prev.src = e.target.result; prev.style.display = 'block'; document.getElementById(`img-${n}`).value = ''; const nm = document.getElementById(`imgname-${n}`); nm.textContent = '✓ ' + file.name; nm.style.display = 'inline'; };
   reader.readAsDataURL(file);
 }
-
-function esc(s) {
-  return (s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function toggleCard(n) {
-  const body = document.getElementById(`body-${n}`);
-  const icon = document.getElementById(`icon-${n}`);
-  body.classList.toggle('collapsed');
-  icon.textContent = body.classList.contains('collapsed') ? '▶' : '▼';
-}
-
-function updatePreview(n) {
-  const val = document.getElementById(`title-${n}`).value.trim();
-  const el = document.getElementById(`preview-${n}`);
-  el.textContent = val || 'Nueva noticia…';
-  el.className = 'article-preview' + (val ? '' : ' empty');
-}
-
-function previewImg(n) {
-  const url = document.getElementById(`img-${n}`).value.trim();
-  const img = document.getElementById(`imgprev-${n}`);
-  if (url) {
-    img.src = url;
-    img.style.display = 'block';
-  } else {
-    img.style.display = 'none';
-  }
-}
-
-function removeCard(n) {
-  const card = document.getElementById(`card-${n}`);
-  if (card) card.remove();
-}
-
-// ─── Recoger datos ─────────────────────────────────────────────────
+function esc(s) { return (s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function toggleCard(n) { const body = document.getElementById(`body-${n}`); const icon = document.getElementById(`icon-${n}`); body.classList.toggle('collapsed'); icon.textContent = body.classList.contains('collapsed') ? '▶' : '▼'; }
+function updatePreview(n) { const val = document.getElementById(`title-${n}`).value.trim(); const el = document.getElementById(`preview-${n}`); el.textContent = val || 'Nueva noticia…'; el.className = 'article-preview' + (val ? '' : ' empty'); }
+function previewImg(n) { const url = document.getElementById(`img-${n}`).value.trim(); const img = document.getElementById(`imgprev-${n}`); if (url) { img.src = url; img.style.display = 'block'; } else { img.style.display = 'none'; } }
+function removeCard(n) { const card = document.getElementById(`card-${n}`); if (card) card.remove(); }
 function getArticles() {
   const cards = document.querySelectorAll('.article-card');
   const result = [];
   cards.forEach(card => {
     const n = card.id.replace('card-', '');
-    const type = card.dataset.type ||
-      (document.getElementById(`typebtn-banner-${n}`)?.classList.contains('active') ? 'banner' : 'noticia');
+    const type = card.dataset.type || (document.getElementById(`typebtn-banner-${n}`)?.classList.contains('active') ? 'banner' : 'noticia');
     const img = imgBase64[n] || (document.getElementById(`img-${n}`) || {}).value || '';
-
-    if (type === 'banner') {
-      if (img) result.push({ type: 'banner', img });
-      return;
-    }
+    if (type === 'banner') { if (img) result.push({ type: 'banner', img }); return; }
     const title = (document.getElementById(`title-${n}`) || {}).value || '';
     if (!title.trim()) return;
-    result.push({
-      type: 'noticia',
-      title,
-      desc: (document.getElementById(`desc-${n}`) || {}).value || '',
-      url:  (document.getElementById(`url-${n}`)  || {}).value || '#',
-      img,
-      age:  (document.getElementById(`age-${n}`)  || {}).value || '',
-    });
+    result.push({ type: 'noticia', title, desc: (document.getElementById(`desc-${n}`) || {}).value || '', url: (document.getElementById(`url-${n}`) || {}).value || '#', img, age: (document.getElementById(`age-${n}`) || {}).value || '' });
   });
   return result;
 }
-
-// ─── Generar HTML ──────────────────────────────────────────────────
 function buildHTML() {
   const nlTitle = document.getElementById('nl-title').value || 'Streaming Hub Weekly';
   const nlDateRaw = document.getElementById('nl-date').value;
   let nlDate = '';
-  if (nlDateRaw) {
-    const d = new Date(nlDateRaw + 'T12:00:00');
-    nlDate = d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-  }
+  if (nlDateRaw) { const d = new Date(nlDateRaw + 'T12:00:00'); nlDate = d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }); }
   const nlIntro = (document.getElementById('nl-intro').value || '').trim();
-  // ONE MORE THING: limpiar el HTML del contenteditable
   const omtEl = document.getElementById('omt-editor');
-  // Clonar para no modificar el DOM visible
   const omtClone = omtEl.cloneNode(true);
-  // Limpiar todos los style inline excepto en <a>
-  omtClone.querySelectorAll('*').forEach(el => {
-    if (el.tagName !== 'A') {
-      el.removeAttribute('style');
-      el.removeAttribute('class');
-    }
-  });
-  // Normalizar enlaces
-  omtClone.querySelectorAll('a').forEach(a => {
-    a.removeAttribute('style');
-    a.removeAttribute('class');
-    a.setAttribute('target', '_blank');
-  });
-  // Quitar divs/spans vacíos del browser y reemplazar <div> por <br>
-  let omtHTML = omtClone.innerHTML
-    .replace(/<div>/gi, '<br>')
-    .replace(/<\/div>/gi, '')
-    .replace(/^<br>/i, '')
-    .trim();
-  // Inyectar estilos inline en <a> para compatibilidad Outlook
+  omtClone.querySelectorAll('*').forEach(el => { if (el.tagName !== 'A') { el.removeAttribute('style'); el.removeAttribute('class'); } });
+  omtClone.querySelectorAll('a').forEach(a => { a.removeAttribute('style'); a.removeAttribute('class'); a.setAttribute('target', '_blank'); });
+  let omtHTML = omtClone.innerHTML.replace(/<div>/gi, '<br>').replace(/<\/div>/gi, '').replace(/^<br>/i, '').trim();
   omtHTML = omtHTML.replace(/<a\s/gi, '<a style="color:#f5a623;font-weight:600;text-decoration:none;" ');
-  // Inyectar color en <b> y <strong> para que no hereden el naranja
   omtHTML = omtHTML.replace(/<b>/gi, '<b style="color:#f0ede8;">');
   omtHTML = omtHTML.replace(/<strong>/gi, '<strong style="color:#f0ede8;">');
   const articles = getArticles();
-
-  // Bloque cabecera: imagen si hay, HTML si no
   const headerHTML = headerImgBase64
-    ? `
-          <!-- CABECERA IMAGEN -->
-          <tr>
-            <td style="padding:0; line-height:0; font-size:0;">
-              <img src="${headerImgBase64}" width="660" alt="Streaming Hub Newsletter" style="display:block; width:100%; max-width:660px; height:auto; border:0;">
-            </td>
-          </tr>`
-    : `
-          <!-- CABECERA HTML -->
-          <tr>
-            <td bgcolor="#f5f0e8" style="background-color:#f5f0e8; padding:0; border-bottom:3px solid #e05500;">
-              <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <!-- Nombre -->
-                  <td valign="middle" style="padding:22px 0 22px 28px; width:1%;">
-                    <table cellpadding="0" cellspacing="0" border="0">
-                      <tr>
-                        <td style="font-family:Arial Black, 'Arial Bold', Arial, sans-serif; font-size:20px; font-weight:900; color:#1a1a1a; letter-spacing:0; line-height:1.15; white-space:nowrap;">STREAMING</td>
-                      </tr>
-                      <tr>
-                        <td style="font-family:Arial Black, 'Arial Bold', Arial, sans-serif; font-size:20px; font-weight:900; color:#e05500; letter-spacing:0; line-height:1.15; white-space:nowrap;">HUB</td>
-                      </tr>
-                    </table>
-                  </td>
-                  <!-- Separador decorativo -->
-                  <td valign="middle" style="padding:0 18px;">
-                    <table cellpadding="0" cellspacing="2" border="0">
-                      <tr>
-                        <td width="10" height="10" bgcolor="#e05500" style="background-color:#e05500; font-size:0; line-height:0;"> </td>
-                        <td width="10" height="10" bgcolor="#f5a623" style="background-color:#f5a623; font-size:0; line-height:0;"> </td>
-                        <td width="10" height="10" bgcolor="#e8380a" style="background-color:#e8380a; font-size:0; line-height:0;"> </td>
-                      </tr>
-                      <tr>
-                        <td width="10" height="10" bgcolor="#f5a623" style="background-color:#f5a623; font-size:0; line-height:0;"> </td>
-                        <td width="10" height="10" bgcolor="#e05500" style="background-color:#e05500; font-size:0; line-height:0;"> </td>
-                        <td width="10" height="10" bgcolor="#f5a623" style="background-color:#f5a623; font-size:0; line-height:0;"> </td>
-                      </tr>
-                      <tr>
-                        <td width="10" height="10" bgcolor="#e8380a" style="background-color:#e8380a; font-size:0; line-height:0;"> </td>
-                        <td width="10" height="10" bgcolor="#f5a623" style="background-color:#f5a623; font-size:0; line-height:0;"> </td>
-                        <td width="10" height="10" bgcolor="#e05500" style="background-color:#e05500; font-size:0; line-height:0;"> </td>
-                      </tr>
-                    </table>
-                  </td>
-                  <!-- Newsletter -->
-                  <td valign="middle" style="padding:0;">
-                    <span style="font-family:Georgia, 'Times New Roman', serif; font-size:34px; font-style:italic; font-weight:400; color:#1a1a1a; letter-spacing:-0.5px;">newsletter</span>
-                  </td>
-                  <!-- Fecha + formas -->
-                  <td valign="middle" align="right" style="padding:22px 28px 22px 18px;">
-                    <table cellpadding="0" cellspacing="0" border="0" align="right">
-                      <tr>
-                        <td align="right" style="padding-bottom:6px;">
-                          <span style="font-family:Arial, sans-serif; font-size:11px; color:#888; letter-spacing:0.3px;">${nlDate}</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td align="right">
-                          <table cellpadding="0" cellspacing="3" border="0">
-                            <tr>
-                              <td width="14" height="14" bgcolor="#e05500" style="background-color:#e05500; font-size:0; line-height:0;"> </td>
-                              <td width="20" height="20" bgcolor="#f5a623" style="background-color:#f5a623; font-size:0; line-height:0;"> </td>
-                            </tr>
-                            <tr>
-                              <td width="20" height="20" bgcolor="#e8380a" style="background-color:#e8380a; font-size:0; line-height:0;"> </td>
-                              <td width="14" height="14" bgcolor="#e05500" style="background-color:#e05500; font-size:0; line-height:0;"> </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>`;
-
-  // Bloque intro (solo si hay texto)
-  const introHTML = nlIntro ? `
-          <!-- INTRO -->
-          <tr>
-            <td bgcolor="#fde8c8" style="background-color:#fde8c8; padding: 18px 24px;">
-              <p class="m-intro" style="margin:0; font-size:14px; color:#3d2000; line-height:1.75; font-family:'Segoe UI',Arial,sans-serif;">${nlIntro.replace(/\n/g, '<br>')}</p>
-            </td>
-          </tr>` : '';
-
+    ? `\n          <tr><td style="padding:0; line-height:0; font-size:0;"><img src="${headerImgBase64}" width="660" alt="Streaming Hub Newsletter" style="display:block; width:100%; max-width:660px; height:auto; border:0;"></td></tr>`
+    : `\n          <tr><td bgcolor="#f5f0e8" style="background-color:#f5f0e8; padding:0; border-bottom:3px solid #e05500;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td valign="middle" style="padding:22px 0 22px 28px; width:1%;"><table cellpadding="0" cellspacing="0" border="0"><tr><td style="font-family:Arial Black,'Arial Bold',Arial,sans-serif; font-size:20px; font-weight:900; color:#1a1a1a; line-height:1.15; white-space:nowrap;">STREAMING</td></tr><tr><td style="font-family:Arial Black,'Arial Bold',Arial,sans-serif; font-size:20px; font-weight:900; color:#e05500; line-height:1.15; white-space:nowrap;">HUB</td></tr></table></td><td valign="middle" style="padding:0 18px;"><table cellpadding="0" cellspacing="2" border="0"><tr><td width="10" height="10" bgcolor="#e05500" style="background-color:#e05500; font-size:0; line-height:0;"> </td><td width="10" height="10" bgcolor="#f5a623" style="background-color:#f5a623; font-size:0; line-height:0;"> </td><td width="10" height="10" bgcolor="#e8380a" style="background-color:#e8380a; font-size:0; line-height:0;"> </td></tr><tr><td width="10" height="10" bgcolor="#f5a623" style="background-color:#f5a623; font-size:0; line-height:0;"> </td><td width="10" height="10" bgcolor="#e05500" style="background-color:#e05500; font-size:0; line-height:0;"> </td><td width="10" height="10" bgcolor="#f5a623" style="background-color:#f5a623; font-size:0; line-height:0;"> </td></tr><tr><td width="10" height="10" bgcolor="#e8380a" style="background-color:#e8380a; font-size:0; line-height:0;"> </td><td width="10" height="10" bgcolor="#f5a623" style="background-color:#f5a623; font-size:0; line-height:0;"> </td><td width="10" height="10" bgcolor="#e05500" style="background-color:#e05500; font-size:0; line-height:0;"> </td></tr></table></td><td valign="middle" style="padding:0;"><span style="font-family:Georgia,'Times New Roman',serif; font-size:34px; font-style:italic; font-weight:400; color:#1a1a1a; letter-spacing:-0.5px;">newsletter</span></td><td valign="middle" align="right" style="padding:22px 28px 22px 18px;"><table cellpadding="0" cellspacing="0" border="0" align="right"><tr><td align="right" style="padding-bottom:6px;"><span style="font-family:Arial,sans-serif; font-size:11px; color:#888; letter-spacing:0.3px;">${nlDate}</span></td></tr><tr><td align="right"><table cellpadding="0" cellspacing="3" border="0"><tr><td width="14" height="14" bgcolor="#e05500" style="background-color:#e05500; font-size:0; line-height:0;"> </td><td width="20" height="20" bgcolor="#f5a623" style="background-color:#f5a623; font-size:0; line-height:0;"> </td></tr><tr><td width="20" height="20" bgcolor="#e8380a" style="background-color:#e8380a; font-size:0; line-height:0;"> </td><td width="14" height="14" bgcolor="#e05500" style="background-color:#e05500; font-size:0; line-height:0;"> </td></tr></table></td></tr></table></td></tr></table></td></tr>`;
+  const introHTML = nlIntro ? `\n          <tr><td bgcolor="#fde8c8" style="background-color:#fde8c8; padding:18px 24px;"><p class="m-intro" style="margin:0; font-size:14px; color:#3d2000; line-height:1.75; font-family:'Segoe UI',Arial,sans-serif;">${nlIntro.replace(/\n/g, '<br>')}</p></td></tr>` : '';
   const articlesHTML = articles.map((a, i) => {
-    // ── Bloque banner: imagen a todo el ancho ──────────────────────
-    if (a.type === 'banner') {
-      return `
-                <!-- BANNER ${i+1} -->
-                <tr>
-                  <td style="padding: 0; border-bottom: 1px solid #edebe9; line-height:0; font-size:0;">
-                    <img src="${a.img}" width="660" alt="" style="display:block; width:100%; max-width:660px; height:auto; border:0;">
-                  </td>
-                </tr>`;
-    }
-
-    // ── Bloque noticia ─────────────────────────────────────────────
-    const withImg = `
-                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                      <tr>
-                        <td class="m-img-td" width="220" valign="top" style="padding-right:20px; width:220px;">
-                          <img class="m-img" src="${a.img}" width="220" height="148" alt="" style="display:block; width:220px; height:148px; object-fit:cover;">
-                        </td>
-                        <td class="m-text-td" valign="top">
-                          <h2 class="m-title" style="margin:0 0 10px 0; font-size:17px; font-weight:700; line-height:1.35; color:#201f1e; font-family:'Segoe UI',Arial,sans-serif;">
-                            <a href="${a.url}" target="_blank" style="color:#201f1e; text-decoration:none;">${a.title}</a>
-                          </h2>
-                          <p class="m-desc" style="margin:0 0 12px 0; font-size:15px; color:#605e5c; line-height:1.6; font-family:'Segoe UI',Arial,sans-serif;">${a.desc}</p>
-                          <span class="m-age" style="font-size:13px; color:#a19f9d; font-family:'Segoe UI',Arial,sans-serif;">${a.age}</span>
-                        </td>
-                      </tr>
-                    </table>`;
-    const noImg = `
-                    <h2 class="m-title" style="margin:0 0 10px 0; font-size:17px; font-weight:700; line-height:1.35; color:#201f1e; font-family:'Segoe UI',Arial,sans-serif;">
-                      <a href="${a.url}" target="_blank" style="color:#201f1e; text-decoration:none;">${a.title}</a>
-                    </h2>
-                    <p class="m-desc" style="margin:0 0 12px 0; font-size:13px; color:#605e5c; line-height:1.55; font-family:'Segoe UI',Arial,sans-serif;">${a.desc}</p>
-                    <span class="m-age" style="font-size:12px; color:#a19f9d; font-family:'Segoe UI',Arial,sans-serif;">${a.age}</span>`;
-
-    return `
-                <!-- ARTÍCULO ${i+1} -->
-                <tr>
-                  <td class="m-pad" style="padding:20px 24px; border-bottom:1px solid #edebe9;">
-                    ${a.img ? withImg : noImg}
-                  </td>
-                </tr>`;
+    if (a.type === 'banner') return `\n                <tr><td style="padding:0; border-bottom:1px solid #edebe9; line-height:0; font-size:0;"><img src="${a.img}" width="660" alt="" style="display:block; width:100%; max-width:660px; height:auto; border:0;"></td></tr>`;
+    const withImg = `<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="m-img-td" valign="top" style="padding-right:20px; width:220px;"><img class="m-img" src="${a.img}" width="220" alt="" style="display:block; width:220px; height:auto; border:0;"></td><td class="m-text-td" valign="top"><h2 class="m-title" style="margin:0 0 10px 0; font-size:17px; font-weight:700; line-height:1.35; color:#201f1e; font-family:'Segoe UI',Arial,sans-serif;"><a href="${a.url}" target="_blank" style="color:#201f1e; text-decoration:none;"><font color="#201f1e">${a.title}</font></a></h2><p class="m-desc" style="margin:0 0 12px 0; font-size:15px; color:#605e5c; line-height:1.6; font-family:'Segoe UI',Arial,sans-serif;">${a.desc}</p><span class="m-age" style="font-size:13px; color:#a19f9d; font-family:'Segoe UI',Arial,sans-serif;">${a.age}</span></td></tr></table>`;
+    const noImg = `<h2 class="m-title" style="margin:0 0 10px 0; font-size:17px; font-weight:700; line-height:1.35; color:#201f1e; font-family:'Segoe UI',Arial,sans-serif;"><a href="${a.url}" target="_blank" style="color:#201f1e; text-decoration:none;"><font color="#201f1e">${a.title}</font></a></h2><p class="m-desc" style="margin:0 0 12px 0; font-size:13px; color:#605e5c; line-height:1.55; font-family:'Segoe UI',Arial,sans-serif;">${a.desc}</p><span class="m-age" style="font-size:12px; color:#a19f9d; font-family:'Segoe UI',Arial,sans-serif;">${a.age}</span>`;
+    return `\n                <tr><td class="m-pad" style="padding:20px 24px; border-bottom:1px solid #edebe9;">${a.img ? withImg : noImg}</td></tr>`;
   }).join('\n');
-
-  // Inyectar <font color> en enlaces y negrita del OMT para Outlook
-  const omtHTMLOutlook = omtHTML
-    .replace(/<a style="([^"]*)"([^>]*)>/gi, '<a style="$1"$2><font color="#f5a623">')
-    .replace(/<\/a>/gi, '</font></a>')
-    .replace(/<b style="([^"]*)">/gi, '<b style="$1"><font color="#ffffff">')
-    .replace(/<\/b>/gi, '</font></b>')
-    .replace(/<strong style="([^"]*)">/gi, '<strong style="$1"><font color="#ffffff">')
-    .replace(/<\/strong>/gi, '</font></strong>');
-
-  // ONE MORE THING block
-  // Outlook Desktop (mso): fondo naranja con texto blanco — fiable en Word engine
-  // Otros clientes (móvil, web): fondo negro estilo Jobs
-  const omtBlock = omtHTML ? `
-          <!-- ONE MORE THING -->
-          <!--[if mso]>
-          <tr>
-            <td bgcolor="#c84400" style="background-color:#c84400; padding:32px 36px 12px 36px; text-align:center;">
-              <p style="margin:0; font-size:34px; font-weight:400; font-style:italic; color:#ffffff; font-family:Georgia,'Times New Roman',serif; letter-spacing:-0.5px; line-height:1.2;"><font color="#ffffff">One more thing&hellip;</font></p>
-            </td>
-          </tr>
-          <tr>
-            <td bgcolor="#c84400" style="background-color:#c84400; padding:0 36px 32px 36px;">
-              <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-                <td style="padding:16px 0 0 0; border-top:2px solid #e06020; font-size:15px; color:#ffffff; line-height:1.8; font-family:Arial,sans-serif;"><font color="#ffffff">${omtHTMLOutlook}</font></td>
-              </tr></table>
-            </td>
-          </tr>
-          <![endif]-->
-          <!--[if !mso]><!-->
-          <tr>
-            <td bgcolor="#080808" style="background-color:#080808; padding:36px 40px 16px 40px; text-align:center;">
-              <p class="m-omt-title" style="margin:0; font-size:38px; font-weight:300; font-style:italic; color:#ffffff; font-family:Georgia,'Times New Roman',serif; letter-spacing:-0.5px; line-height:1.2;">One more thing&hellip;</p>
-            </td>
-          </tr>
-          <tr>
-            <td bgcolor="#080808" style="background-color:#080808; padding:0 40px 36px 40px;">
-              <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <td class="m-omt" style="padding:20px 0 0 0; border-top:1px solid #333333; font-size:15px; color:#d0ccc8; line-height:1.8; font-family:'Segoe UI',Arial,sans-serif;">${omtHTML}</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <!--<![endif]-->` : '';
-
-  return `<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>${nlTitle}</title>
-  <style type="text/css">
-    /* Fluido en móvil: evita que Outlook escale todo al 57% */
-    .email-body { width:100% !important; }
-    .email-container { width:100% !important; max-width:660px !important; }
-    @media only screen and (max-width: 620px) {
-      .m-pad    { padding:16px !important; }
-      .m-img-td { display:block !important; width:100% !important; padding-right:0 !important; padding-bottom:12px !important; }
-      .m-img    { width:100% !important; height:auto !important; max-height:none !important; }
-      .m-text-td{ display:block !important; width:100% !important; }
-      .m-title  { font-size:19px !important; line-height:1.4 !important; }
-      .m-desc   { font-size:16px !important; line-height:1.7  !important; }
-      .m-age    { font-size:14px !important; }
-      .m-intro  { font-size:16px !important; line-height:1.75 !important; }
-      .m-omt    { font-size:16px !important; line-height:1.75 !important; }
-      .m-omt-title { font-size:28px !important; }
-    }
-  </style>
-</head>
-<body style="margin:0; padding:0; background-color:#f3f2f1; font-family:'Segoe UI',Arial,Helvetica,sans-serif; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">
-  <table class="email-body" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f3f2f1" style="background-color:#f3f2f1; width:100%;">
-    <tr>
-      <td align="center" style="padding:0 0 32px 0;">
-        <!--[if mso]><table width="660" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
-        <table class="email-container" cellpadding="0" cellspacing="0" border="0" style="max-width:660px; width:100%;">
-${headerHTML}
-${introHTML}
-          <!-- CUERPO -->
-          <tr>
-            <td bgcolor="#ffffff" style="background-color:#ffffff; padding: 8px 0 0 0;">
-              <table width="100%" cellpadding="0" cellspacing="0" border="0">
-${articlesHTML}
-              </table>
-            </td>
-          </tr>
-${omtBlock}
-          <tr>
-            <td bgcolor="#ffffff" style="background-color:#ffffff; padding:0;">
-              <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <!-- BOTÓN -->
-                <tr>
-                  <td style="padding: 24px; text-align:center;">
-                    <a href="https://atresmedia.sharepoint.com/sites/StreamingHub" target="_blank" style="display:inline-block; background-color:#e05500; color:#ffffff; font-size:13px; font-weight:600; font-family: 'Segoe UI', Arial, sans-serif; text-decoration:none; padding:10px 24px; border-radius:2px;">Ver todas las noticias</a>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <!-- PIE -->
-          <tr>
-            <td bgcolor="#f3f2f1" style="background-color:#f3f2f1; padding: 16px 24px; text-align:center; border-top: 1px solid #edebe9;">
-              <p style="margin:0; font-size:11px; color:#a19f9d; font-family: 'Segoe UI', Arial, sans-serif;">Streaming Hub · Atresmedia · Distribución interna</p>
-            </td>
-          </tr>
-        </table>
-        <!--[if mso]></td></tr></table><![endif]-->
-      </td>
-    </tr>
-  </table>
-</body>
-</html>`;
+  const omtHTMLOutlook = omtHTML.replace(/<a style="([^"]*)"([^>]*)>/gi, '<a style="$1"$2><font color="#f5a623">').replace(/<\/a>/gi, '</font></a>').replace(/<b style="([^"]*)">/gi, '<b style="$1"><font color="#ffffff">').replace(/<\/b>/gi, '</font></b>').replace(/<strong style="([^"]*)">/gi, '<strong style="$1"><font color="#ffffff">').replace(/<\/strong>/gi, '</font></strong>');
+  const omtBlock = omtHTML ? `\n          <!--[if mso]>\n          <tr><td bgcolor="#c84400" style="background-color:#c84400; padding:32px 36px 12px 36px; text-align:center;"><p style="margin:0; font-size:34px; font-weight:400; font-style:italic; color:#ffffff; font-family:Georgia,'Times New Roman',serif; letter-spacing:-0.5px; line-height:1.2;"><font color="#ffffff">One more thing&hellip;</font></p></td></tr>\n          <tr><td bgcolor="#c84400" style="background-color:#c84400; padding:0 36px 32px 36px;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:16px 0 0 0; border-top:2px solid #e06020; font-size:15px; color:#ffffff; line-height:1.8; font-family:Arial,sans-serif;"><font color="#ffffff">${omtHTMLOutlook}</font></td></tr></table></td></tr>\n          <![endif]-->\n          <!--[if !mso]><!-->\n          <tr><td bgcolor="#080808" style="background-color:#080808; padding:36px 40px 16px 40px; text-align:center;"><p class="m-omt-title" style="margin:0; font-size:38px; font-weight:300; font-style:italic; color:#ffffff; font-family:Georgia,'Times New Roman',serif; letter-spacing:-0.5px; line-height:1.2;">One more thing&hellip;</p></td></tr>\n          <tr><td bgcolor="#080808" style="background-color:#080808; padding:0 40px 36px 40px;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="m-omt" style="padding:20px 0 0 0; border-top:1px solid #333333; font-size:15px; color:#d0ccc8; line-height:1.8; font-family:'Segoe UI',Arial,sans-serif;">${omtHTML}</td></tr></table></td></tr>\n          <!--<![endif]-->` : '';
+  return `<!DOCTYPE html>\n<html lang="es">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <meta http-equiv="X-UA-Compatible" content="IE=edge">\n  <title>${nlTitle}</title>\n  <style type="text/css">\n    .email-body { width:100% !important; }\n    .email-container { width:100% !important; max-width:660px !important; }\n    @media only screen and (max-width: 620px) {\n      .m-pad    { padding:16px !important; }\n      .m-img-td { display:block !important; width:100% !important; max-width:100% !important; padding-right:0 !important; padding-bottom:14px !important; }\n      .m-img    { width:100% !important; max-width:100% !important; height:auto !important; }\n      .m-text-td{ display:block !important; width:100% !important; }\n      .m-title  { font-size:20px !important; line-height:1.4 !important; }\n      .m-desc   { font-size:16px !important; line-height:1.75 !important; }\n      .m-age    { font-size:14px !important; }\n      .m-intro  { font-size:16px !important; line-height:1.8 !important; }\n      .m-omt    { font-size:16px !important; line-height:1.8 !important; }\n      .m-omt-title { font-size:28px !important; }\n    }\n  </style>\n</head>\n<body style="margin:0; padding:0; background-color:#f3f2f1; font-family:'Segoe UI',Arial,Helvetica,sans-serif; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">\n  <table class="email-body" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f3f2f1" style="background-color:#f3f2f1; width:100%;">\n    <tr>\n      <td align="center" style="padding:0 0 32px 0;">\n        <!--[if mso]><table width="660" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->\n        <table class="email-container" cellpadding="0" cellspacing="0" border="0" style="max-width:660px; width:100%;">\n${headerHTML}\n${introHTML}\n          <tr><td bgcolor="#ffffff" style="background-color:#ffffff; padding:8px 0 0 0;"><table width="100%" cellpadding="0" cellspacing="0" border="0">\n${articlesHTML}\n          </table></td></tr>\n${omtBlock}\n          <tr><td bgcolor="#ffffff" style="background-color:#ffffff; padding:0;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:24px; text-align:center;"><a href="https://atresmedia.sharepoint.com/sites/StreamingHub" target="_blank" style="display:inline-block; background-color:#e05500; color:#ffffff; font-size:13px; font-weight:600; font-family:'Segoe UI',Arial,sans-serif; text-decoration:none; padding:10px 24px; border-radius:2px;">Ver todas las noticias</a></td></tr></table></td></tr>\n          <tr><td bgcolor="#f3f2f1" style="background-color:#f3f2f1; padding:16px 24px; text-align:center; border-top:1px solid #edebe9;"><p style="margin:0; font-size:11px; color:#a19f9d; font-family:'Segoe UI',Arial,sans-serif;">Streaming Hub · Atresmedia · Distribución interna</p></td></tr>\n        </table>\n        <!--[if mso]></td></tr></table><![endif]-->\n      </td>\n    </tr>\n  </table>\n</body>\n</html>`;
 }
-
-// ─── Editor ONE MORE THING ─────────────────────────────────────────
-function omtFormat(cmd) {
-  document.getElementById('omt-editor').focus();
-  document.execCommand(cmd, false, null);
-}
+function omtFormat(cmd) { document.getElementById('omt-editor').focus(); document.execCommand(cmd, false, null); }
 function omtAddLink() {
   const sel = window.getSelection();
-  if (!sel || sel.isCollapsed) {
-    alert('Selecciona primero el texto que quieres enlazar.');
-    return;
-  }
+  if (!sel || sel.isCollapsed) { alert('Selecciona primero el texto que quieres enlazar.'); return; }
   const url = prompt('URL del enlace (incluyendo https://):');
-  if (url && url.trim()) {
-    document.getElementById('omt-editor').focus();
-    document.execCommand('createLink', false, url.trim());
-    // Añadir target="_blank" al enlace recién creado
-    const links = document.getElementById('omt-editor').querySelectorAll('a');
-    links.forEach(a => { if (!a.target) a.target = '_blank'; });
-  }
+  if (url && url.trim()) { document.getElementById('omt-editor').focus(); document.execCommand('createLink', false, url.trim()); const links = document.getElementById('omt-editor').querySelectorAll('a'); links.forEach(a => { if (!a.target) a.target = '_blank'; }); }
 }
-function omtRemoveLink() {
-  document.getElementById('omt-editor').focus();
-  document.execCommand('unlink', false, null);
-}
-
-function generateNewsletter() {
-  const html = buildHTML();
-  document.getElementById('result-code').value = html;
-  document.getElementById('result-overlay').classList.add('open');
-}
-
-function closeModal() {
-  document.getElementById('result-overlay').classList.remove('open');
-}
-
-function copyCode() {
-  const ta = document.getElementById('result-code');
-  ta.select();
-  document.execCommand('copy');
-  const ok = document.getElementById('copy-ok');
-  ok.style.display = 'inline';
-  setTimeout(() => ok.style.display = 'none', 2000);
-}
-
+function omtRemoveLink() { document.getElementById('omt-editor').focus(); document.execCommand('unlink', false, null); }
+function generateNewsletter() { const html = buildHTML(); document.getElementById('result-code').value = html; document.getElementById('result-overlay').classList.add('open'); }
+function closeModal() { document.getElementById('result-overlay').classList.remove('open'); }
+function copyCode() { const ta = document.getElementById('result-code'); ta.select(); document.execCommand('copy'); const ok = document.getElementById('copy-ok'); ok.style.display = 'inline'; setTimeout(() => ok.style.display = 'none', 2000); }
 function downloadBat() {
-  const bat = `@echo off\r\nsetlocal enabledelayedexpansion\r\nchcp 65001 >nul 2>&1\r\n\r\nset "DIR=%~dp0"\r\n\r\nset "HTML="\r\nfor /f "tokens=*" %%f in ('dir /b /o-d "%DIR%streaming-hub-*.html" 2^>nul') do (\r\n    if "!HTML!"=="" set "HTML=%%f"\r\n)\r\n\r\nif "!HTML!"=="" (\r\n    echo.\r\n    echo  No se encontro ningun archivo streaming-hub-*.html en esta carpeta.\r\n    echo  Descarga el newsletter desde el editor y pon ambos archivos en la misma carpeta.\r\n    echo.\r\n    pause\r\n    exit /b 1\r\n)\r\n\r\necho.\r\necho  Abriendo "%HTML%" en Outlook...\r\necho.\r\n\r\nset "PS1=%TEMP%\\sh_outlook_%RANDOM%.ps1"\r\n\r\n(\r\necho $path = '%DIR%%HTML%'\r\necho $html = [System.IO.File]::ReadAllText^($path, [System.Text.Encoding]::UTF8^)\r\necho try {\r\necho   $ol   = New-Object -ComObject Outlook.Application\r\necho   $mail = $ol.CreateItem^(0^)\r\necho   $mail.HTMLBody = $html\r\necho   $mail.Display^(^)\r\necho   Write-Host " Borrador abierto en Outlook."\r\necho } catch {\r\necho   Write-Host " Error: $_"\r\necho   Read-Host " Pulsa Enter para cerrar"\r\necho }\r\n) > "%PS1%"\r\n\r\npowershell -NoProfile -ExecutionPolicy Bypass -File "%PS1%"\r\ndel "%PS1%" >nul 2>&1\r\n\r\necho.\r\npause\r\n`;
+  const from = 'streaming.hub@atresmedia.com';
+  const olExe = 'C:\\Program Files\\Microsoft Office\\root\\Office16\\OUTLOOK.EXE';
+  const lines = [
+    '@echo off','chcp 65001 >nul 2>&1','set "DIR=%~dp0"','set "FROM=' + from + '"','set "OUTLOOK_EXE=' + olExe + '"','',
+    'powershell -NoProfile -ExecutionPolicy Bypass -Command ^',
+    '  "$dir = \'%DIR%\'; $fromAddr = \'%FROM%\'; $outlookExe = \'%OUTLOOK_EXE%\'; " ^',
+    '  "Write-Host \'\'; " ^',
+    '  "Write-Host \'  ============================================\'; " ^',
+    '  "Write-Host \'   Streaming Hub - Abrir en Outlook Classic\'; " ^',
+    '  "Write-Host \'  ============================================\'; " ^',
+    '  "Write-Host \'\'; " ^',
+    '  "$files = Get-ChildItem -Path $dir -Filter \'streaming-hub-*.html\' | Sort-Object LastWriteTime -Descending; " ^',
+    '  "if ($files.Count -eq 0) { Write-Host \'  ERROR: No hay ningún streaming-hub-*.html en esta carpeta.\'; Read-Host \'  Pulsa Enter\'; exit }; " ^',
+    '  "$html = [System.IO.File]::ReadAllText($files[0].FullName, [System.Text.Encoding]::UTF8); " ^',
+    '  "Write-Host \"  Archivo: $($files[0].Name)\"; " ^',
+    '  "Write-Host \'  Cerrando instancias previas de Outlook...\'; " ^',
+    '  "Get-Process OUTLOOK -ErrorAction SilentlyContinue | Stop-Process -Force; " ^',
+    '  "Start-Sleep -Seconds 2; " ^',
+    '  "if (Test-Path $outlookExe) { Write-Host \'  Lanzando Outlook Classic...\'; Start-Process $outlookExe; Write-Host \'  Esperando arranque (10 seg)...\'; Start-Sleep -Seconds 10 } " ^',
+    '  "else { Write-Host \'  AVISO: Outlook Classic no encontrado.\' }; " ^',
+    '  "$ol = $null; " ^',
+    '  "for ($i = 1; $i -le 4; $i++) { try { $ol = New-Object -ComObject Outlook.Application; break } catch { Write-Host \"  Reintento $i/4...\"; Start-Sleep -Seconds 3 } }; " ^',
+    '  "if (-not $ol) { Write-Host \'  ERROR: No se pudo conectar con Outlook.\'; Read-Host \'  Pulsa Enter\'; exit }; " ^',
+    '  "try { " ^',
+    '  "  $mail = $ol.CreateItem(0); " ^',
+    '  "  $account = $ol.Session.Accounts | Where-Object { $_.SmtpAddress -eq $fromAddr } | Select-Object -First 1; " ^',
+    '  "  $default = $ol.Session.Accounts | Select-Object -First 1; " ^',
+    '  "  if ($account) { $mail.SendUsingAccount = $account; Write-Host \"  Remitente: $fromAddr\" } " ^',
+    '  "  elseif ($default) { Write-Host \"  Remitente: $($default.SmtpAddress)\" }; " ^',
+    '  "  $mail.HTMLBody = $html; " ^',
+    '  "  $mail.Display(); " ^',
+    '  "  Write-Host \'  Borrador abierto. Pulsa Enviar en Outlook Classic.\'; " ^',
+    '  "} catch { Write-Host \"  ERROR: $_\" }; " ^',
+    '  "Read-Host \'  Pulsa Enter para cerrar\'"',
+  ];
+  const bat = lines.join('\r\n') + '\r\n';
   const blob = new Blob([bat], { type: 'application/octet-stream' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'abrir-en-outlook.bat';
   a.click();
 }
-
 function downloadNewsletter() {
   const html = buildHTML();
   const nlTitle = document.getElementById('nl-title').value || 'streaming-hub-weekly';
@@ -992,11 +340,7 @@ function downloadNewsletter() {
   a.download = filename;
   a.click();
 }
-
-// Cerrar modal al clicar fuera
-document.getElementById('result-overlay').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
+document.getElementById('result-overlay').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 </script>
 </body>
 </html>
