@@ -421,10 +421,8 @@ function buildHTML() {
                   </td>
                 </tr>`;
     }
-    // FIX: títulos en Outlook — texto plano vía MSO, enlace clickable en el resto
-    const titleMso = a.title;
-    const titleLinked = `<a href="${a.url}" target="_blank" style="color:#201f1e; text-decoration:none;">${a.title}</a>`;
-    const titleHTML = `<!--[if mso]>${titleMso}<![endif]--><!--[if !mso]><!-->` + titleLinked + `<!--<![endif]-->`;
+    // FIX: color oscuro en links — inline + font tag + mso-color-alt
+    const titleHTML = `<a href="${a.url}" target="_blank" style="color:#201f1e; text-decoration:none; mso-color-alt:windowtext;"><font color="#201f1e">${a.title}</font></a>`;
 
     const withImg = `
                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -504,6 +502,11 @@ function buildHTML() {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>${nlTitle}</title>
+  <!--[if mso]>
+  <style type="text/css">
+    a, a:link, a:visited { color: #201f1e !important; text-decoration: none !important; }
+  </style>
+  <![endif]-->
   <style type="text/css">
     .email-body { width:100% !important; }
     .email-container { width:100% !important; max-width:660px !important; }
