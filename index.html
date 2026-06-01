@@ -408,7 +408,7 @@ function buildHTML() {
   const introHTML = nlIntro ? `
           <tr>
             <td bgcolor="#fde8c8" style="background-color:#fde8c8; padding:18px 24px;">
-              <p class="m-intro" style="margin:0; font-size:14px; color:#3d2000; line-height:1.75; font-family:'Segoe UI',Arial,sans-serif;">${nlIntro.replace(/\n/g, '<br>')}</p>
+              <p class="m-intro" style="margin:0; font-size:16px; color:#3d2000; line-height:1.75; font-family:'Segoe UI',Arial,sans-serif;">${nlIntro.replace(/\n/g, '<br>')}</p>
             </td>
           </tr>` : '';
 
@@ -432,22 +432,22 @@ function buildHTML() {
                         </td>
                         <td class="m-text-td" valign="top" style="color:#201f1e;">
                           <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                            <tr><td class="m-title" style="padding:0 0 10px 0; font-size:17px; font-weight:700; line-height:1.35; color:#201f1e; font-family:'Segoe UI',Arial,sans-serif;">
+                            <tr><td class="m-title" style="padding:0 0 10px 0; font-size:19px; font-weight:700; line-height:1.35; color:#201f1e; font-family:'Segoe UI',Arial,sans-serif;">
                               ${titleHTML}
                             </td></tr>
-                            <tr><td class="m-desc" style="padding:0 0 12px 0; font-size:15px; color:#605e5c; line-height:1.6; font-family:'Segoe UI',Arial,sans-serif;">${a.desc}</td></tr>
-                            <tr><td class="m-age" style="font-size:13px; color:#a19f9d; font-family:'Segoe UI',Arial,sans-serif;">${a.age}</td></tr>
+                            <tr><td class="m-desc" style="padding:0 0 12px 0; font-size:17px; color:#605e5c; line-height:1.6; font-family:'Segoe UI',Arial,sans-serif;">${a.desc}</td></tr>
+                            <tr><td class="m-age" style="font-size:15px; color:#a19f9d; font-family:'Segoe UI',Arial,sans-serif;">${a.age}</td></tr>
                           </table>
                         </td>
                       </tr>
                     </table>`;
     const noImg = `
                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                      <tr><td class="m-title" style="padding:0 0 10px 0; font-size:17px; font-weight:700; line-height:1.35; color:#201f1e; font-family:'Segoe UI',Arial,sans-serif;">
+                      <tr><td class="m-title" style="padding:0 0 10px 0; font-size:19px; font-weight:700; line-height:1.35; color:#201f1e; font-family:'Segoe UI',Arial,sans-serif;">
                         ${titleHTML}
                       </td></tr>
-                      <tr><td class="m-desc" style="padding:0 0 12px 0; font-size:15px; color:#605e5c; line-height:1.6; font-family:'Segoe UI',Arial,sans-serif;">${a.desc}</td></tr>
-                      <tr><td class="m-age" style="font-size:13px; color:#a19f9d; font-family:'Segoe UI',Arial,sans-serif;">${a.age}</td></tr>
+                      <tr><td class="m-desc" style="padding:0 0 12px 0; font-size:17px; color:#605e5c; line-height:1.6; font-family:'Segoe UI',Arial,sans-serif;">${a.desc}</td></tr>
+                      <tr><td class="m-age" style="font-size:15px; color:#a19f9d; font-family:'Segoe UI',Arial,sans-serif;">${a.age}</td></tr>
                     </table>`;
     return `
                 <tr>
@@ -489,7 +489,7 @@ function buildHTML() {
           <tr>
             <td bgcolor="#080808" style="background-color:#080808; padding:0 40px 36px 40px;">
               <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr><td class="m-omt" style="padding:20px 0 0 0; border-top:1px solid #333333; font-size:15px; color:#d0ccc8; line-height:1.8; font-family:'Segoe UI',Arial,sans-serif;">${omtHTML}</td></tr>
+                <tr><td class="m-omt" style="padding:20px 0 0 0; border-top:1px solid #333333; font-size:17px; color:#d0ccc8; line-height:1.8; font-family:'Segoe UI',Arial,sans-serif;">${omtHTML}</td></tr>
               </table>
             </td>
           </tr>
@@ -515,11 +515,11 @@ function buildHTML() {
       .m-img-td { display:block !important; width:100% !important; padding-right:0 !important; padding-bottom:12px !important; }
       .m-img    { width:100% !important; max-width:100% !important; height:auto !important; }
       .m-text-td{ display:block !important; width:100% !important; }
-      .m-title  { font-size:19px !important; line-height:1.4 !important; padding-bottom:8px !important; }
-      .m-desc   { font-size:15px !important; line-height:1.7 !important; padding-bottom:10px !important; }
-      .m-age    { font-size:13px !important; }
-      .m-intro  { font-size:15px !important; line-height:1.8 !important; }
-      .m-omt    { font-size:15px !important; line-height:1.8 !important; }
+      .m-title  { font-size:21px !important; line-height:1.4 !important; padding-bottom:8px !important; }
+      .m-desc   { font-size:17px !important; line-height:1.7 !important; padding-bottom:10px !important; }
+      .m-age    { font-size:15px !important; }
+      .m-intro  { font-size:17px !important; line-height:1.8 !important; }
+      .m-omt    { font-size:17px !important; line-height:1.8 !important; }
       .m-omt-title { font-size:28px !important; }
     }
   </style>
