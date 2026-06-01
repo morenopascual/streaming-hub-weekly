@@ -608,7 +608,7 @@ function downloadBat() {
     '  "if (Test-Path $outlookExe) { Start-Process $outlookExe; Start-Sleep -Seconds 10 }; " ^',
     '  "$ol = $null; for ($i=1;$i-le 4;$i++) { try { $ol=New-Object -ComObject Outlook.Application; break } catch { Start-Sleep -Seconds 3 } }; " ^',
     '  "if (-not $ol) { Write-Host \'ERROR: No se pudo conectar con Outlook.\'; Read-Host \'Pulsa Enter\'; exit }; " ^',
-    '  "try { $mail=$ol.CreateItem(0); $acc=$ol.Session.Accounts|Where-Object{$_.SmtpAddress -eq $fromAddr}|Select-Object -First 1; $def=$ol.Session.Accounts|Select-Object -First 1; if($acc){$mail.SendUsingAccount=$acc;Write-Host \"Remitente: $fromAddr\"} elseif($def){Write-Host \"Remitente: $($def.SmtpAddress)\"}; $mail.HTMLBody=$html; $mail.Display(); Write-Host \'Borrador abierto en Outlook Classic.\' } catch { Write-Host \"ERROR: $_\" }; " ^',
+    '  "try { $mail=$ol.CreateItem(0); $acc=$ol.Session.Accounts|Where-Object{$_.SmtpAddress -eq $fromAddr}|Select-Object -First 1; if($acc){$mail.SendUsingAccount=$acc;Write-Host \"Remitente (cuenta): $fromAddr\"} else { try { $mail.SentOnBehalfOfName=$fromAddr; Write-Host \"Remitente (buzón compartido): $fromAddr\" } catch { Write-Host \"Remitente: cuenta por defecto\" } }; $mail.HTMLBody=$html; $mail.Display(); Write-Host \'Borrador abierto en Outlook Classic.\' } catch { Write-Host \"ERROR: $_\" }; " ^',
     '  "Read-Host \'Pulsa Enter para cerrar\'"'
   ];
   const bat = lines.join('\r\n') + '\r\n';
