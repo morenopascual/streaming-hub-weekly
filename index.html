@@ -63,7 +63,8 @@
     .type-toggle { display: flex; gap: 0; margin-bottom: 4px; }
     .type-btn { flex: 1; padding: 7px 10px; font-size: 12px; font-weight: 600; font-family: inherit; cursor: pointer; border: 1px solid #d0ccc7; background: #faf9f8; color: #605e5c; transition: all 0.15s; }
     .type-btn:first-child { border-radius: 2px 0 0 2px; }
-    .type-btn:last-child  { border-radius: 0 2px 2px 0; border-left: none; }
+    .type-btn:last-child  { border-radius: 0 2px 2px 0; }
+    .type-btn:not(:first-child) { border-left: none; }
     .type-btn.active { background: #c8290e; color: #fff; border-color: #c8290e; }
   </style>
 </head>
@@ -194,7 +195,7 @@ function addArticle(data) {
     <div class="article-header" onclick="toggleCard(${n})">
       <div class="article-num">${n}</div>
       <div class="article-preview ${d.title ? '' : 'empty'}" id="preview-${n}">
-        ${type === 'banner' ? '🖼 Imagen a todo el ancho' : (d.title || 'Nueva noticia…')}
+        ${type === 'banner' ? '🖼 Imagen a todo el ancho' : type === 'bloque' ? ('📋 ' + (d.btitle || 'Bloque temático…')) : (d.title || 'Nueva noticia…')}
       </div>
       <span class="toggle-icon" id="icon-${n}">▼</span>
     </div>
@@ -203,7 +204,8 @@ function addArticle(data) {
         <label>Tipo de bloque</label>
         <div class="type-toggle">
           <button class="type-btn ${type === 'noticia' ? 'active' : ''}" id="typebtn-noticia-${n}" onclick="setType(${n},'noticia')">📰 Noticia</button>
-          <button class="type-btn ${type === 'banner' ? 'active' : ''}" id="typebtn-banner-${n}" onclick="setType(${n},'banner')">🖼 Imagen a todo el ancho</button>
+          <button class="type-btn ${type === 'bloque' ? 'active' : ''}" id="typebtn-bloque-${n}" onclick="setType(${n},'bloque')">📋 Bloque temático</button>
+          <button class="type-btn ${type === 'banner' ? 'active' : ''}" id="typebtn-banner-${n}" onclick="setType(${n},'banner')">🖼 Banner</button>
         </div>
       </div>
       <div id="fields-noticia-${n}" style="${type === 'banner' ? 'display:none' : ''}">
@@ -220,6 +222,37 @@ function addArticle(data) {
           <input type="text" id="url-${n}" value="${esc(d.url)}" placeholder="https://…">
         </div>
       </div>
+      <div id="fields-bloque-${n}" style="${type !== 'bloque' ? 'display:none' : ''}">
+        <div class="field">
+          <label>Título del bloque *</label>
+          <input type="text" id="btitle-${n}" value="${esc(d.btitle||'')}" placeholder="ej. Esta semana en Netflix" oninput="updateBloquePreview(${n})">
+        </div>
+        <div class="field">
+          <label>Introducción <span style="font-weight:400;color:#a19f9d;">(opcional)</span></label>
+          <textarea id="bintro-${n}" placeholder="Texto introductorio del bloque…" style="min-height:54px;">${esc(d.bintro||'')}</textarea>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:4px;">
+          <div style="border-left:3px solid #e05500;padding-left:12px;display:flex;flex-direction:column;gap:6px;">
+            <span style="font-size:11px;font-weight:700;color:#e05500;text-transform:uppercase;letter-spacing:0.5px;">Noticia 1 *</span>
+            <input type="text" id="bst1-${n}" value="${esc((d.subitems&&d.subitems[0]&&d.subitems[0].title)||'')}" placeholder="Título">
+            <input type="text" id="bsu1-${n}" value="${esc((d.subitems&&d.subitems[0]&&d.subitems[0].url)||'')}" placeholder="URL https://…">
+            <textarea id="bsd1-${n}" placeholder="Descripción" style="min-height:48px;">${esc((d.subitems&&d.subitems[0]&&d.subitems[0].desc)||'')}</textarea>
+          </div>
+          <div style="border-left:3px solid #e05500;padding-left:12px;display:flex;flex-direction:column;gap:6px;">
+            <span style="font-size:11px;font-weight:700;color:#e05500;text-transform:uppercase;letter-spacing:0.5px;">Noticia 2</span>
+            <input type="text" id="bst2-${n}" value="${esc((d.subitems&&d.subitems[1]&&d.subitems[1].title)||'')}" placeholder="Título">
+            <input type="text" id="bsu2-${n}" value="${esc((d.subitems&&d.subitems[1]&&d.subitems[1].url)||'')}" placeholder="URL https://…">
+            <textarea id="bsd2-${n}" placeholder="Descripción" style="min-height:48px;">${esc((d.subitems&&d.subitems[1]&&d.subitems[1].desc)||'')}</textarea>
+          </div>
+          <div style="border-left:3px solid #f5a623;padding-left:12px;display:flex;flex-direction:column;gap:6px;">
+            <span style="font-size:11px;font-weight:700;color:#f5a623;text-transform:uppercase;letter-spacing:0.5px;">Noticia 3 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#a19f9d;">(opcional)</span></span>
+            <input type="text" id="bst3-${n}" value="${esc((d.subitems&&d.subitems[2]&&d.subitems[2].title)||'')}" placeholder="Título">
+            <input type="text" id="bsu3-${n}" value="${esc((d.subitems&&d.subitems[2]&&d.subitems[2].url)||'')}" placeholder="URL https://…">
+            <textarea id="bsd3-${n}" placeholder="Descripción" style="min-height:48px;">${esc((d.subitems&&d.subitems[2]&&d.subitems[2].desc)||'')}</textarea>
+          </div>
+        </div>
+      </div>
+      <div id="fields-img-${n}" style="${type === 'bloque' ? 'display:none' : ''}">
       <div class="field">
         <label id="imglabel-${n}">${type === 'banner' ? 'Imagen *' : 'Imagen'}</label>
         <div style="display:flex; gap:8px; align-items:flex-start; flex-wrap:wrap;">
@@ -232,10 +265,11 @@ function addArticle(data) {
         <img id="imgprev-${n}" class="img-preview" src="" alt="">
         <span id="imgname-${n}" style="font-size:11px; color:#107c10; display:none;"></span>
       </div>
-      <div class="field" id="fields-age-${n}" style="${type === 'banner' ? 'display:none' : ''}">
+      <div class="field" id="fields-age-${n}" style="${type === 'banner' || type === 'bloque' ? 'display:none' : ''}">
         <label>Antigüedad</label>
         <input type="text" id="age-${n}" value="${esc(d.age)}" placeholder="ej. hace 2 días">
       </div>
+      </div><!-- /fields-img -->
       <button class="remove-btn" onclick="removeCard(${n})">Eliminar este bloque</button>
     </div>
   `;
@@ -245,14 +279,25 @@ function addArticle(data) {
 
 function setType(n, type) {
   document.getElementById(`typebtn-noticia-${n}`).classList.toggle('active', type === 'noticia');
+  document.getElementById(`typebtn-bloque-${n}`).classList.toggle('active', type === 'bloque');
   document.getElementById(`typebtn-banner-${n}`).classList.toggle('active', type === 'banner');
-  document.getElementById(`fields-noticia-${n}`).style.display = type === 'banner' ? 'none' : '';
-  document.getElementById(`fields-age-${n}`).style.display    = type === 'banner' ? 'none' : '';
+  document.getElementById(`fields-noticia-${n}`).style.display = (type === 'banner' || type === 'bloque') ? 'none' : '';
+  document.getElementById(`fields-bloque-${n}`).style.display  = type === 'bloque' ? '' : 'none';
+  document.getElementById(`fields-img-${n}`).style.display     = type === 'bloque' ? 'none' : '';
+  document.getElementById(`fields-age-${n}`).style.display     = (type === 'banner' || type === 'bloque') ? 'none' : '';
   document.getElementById(`imglabel-${n}`).textContent = type === 'banner' ? 'Imagen *' : 'Imagen';
   const prev = document.getElementById(`preview-${n}`);
   if (type === 'banner') { prev.textContent = '🖼 Imagen a todo el ancho'; prev.classList.remove('empty'); }
+  else if (type === 'bloque') { const t = (document.getElementById(`btitle-${n}`) || {}).value || ''; prev.textContent = t ? '📋 ' + t : 'Bloque temático…'; prev.className = 'article-preview' + (t ? '' : ' empty'); }
   else { const t = (document.getElementById(`title-${n}`) || {}).value || ''; prev.textContent = t || 'Nueva noticia…'; prev.className = 'article-preview' + (t ? '' : ' empty'); }
   document.getElementById(`card-${n}`).dataset.type = type;
+}
+
+function updateBloquePreview(n) {
+  const val = document.getElementById(`btitle-${n}`).value.trim();
+  const el = document.getElementById(`preview-${n}`);
+  el.textContent = val ? '📋 ' + val : 'Bloque temático…';
+  el.className = 'article-preview' + (val ? '' : ' empty');
 }
 
 let headerImgBase64 = '';
@@ -315,9 +360,23 @@ function getArticles() {
   const result = [];
   cards.forEach(card => {
     const n = card.id.replace('card-', '');
-    const type = card.dataset.type || (document.getElementById(`typebtn-banner-${n}`)?.classList.contains('active') ? 'banner' : 'noticia');
+    const type = card.dataset.type || (document.getElementById(`typebtn-banner-${n}`)?.classList.contains('active') ? 'banner' : document.getElementById(`typebtn-bloque-${n}`)?.classList.contains('active') ? 'bloque' : 'noticia');
     const img = imgBase64[n] || (document.getElementById(`img-${n}`) || {}).value || '';
     if (type === 'banner') { if (img) result.push({ type: 'banner', img }); return; }
+    if (type === 'bloque') {
+      const btitle = (document.getElementById(`btitle-${n}`) || {}).value || '';
+      if (!btitle.trim()) return;
+      const bintro = (document.getElementById(`bintro-${n}`) || {}).value || '';
+      const subitems = [];
+      for (let i = 1; i <= 3; i++) {
+        const st = (document.getElementById(`bst${i}-${n}`) || {}).value || '';
+        if (!st.trim()) continue;
+        subitems.push({ title: st, url: (document.getElementById(`bsu${i}-${n}`) || {}).value || '#', desc: (document.getElementById(`bsd${i}-${n}`) || {}).value || '' });
+      }
+      if (subitems.length === 0) return;
+      result.push({ type: 'bloque', btitle, bintro, subitems });
+      return;
+    }
     const title = (document.getElementById(`title-${n}`) || {}).value || '';
     if (!title.trim()) return;
     result.push({ type: 'noticia', title, desc: (document.getElementById(`desc-${n}`) || {}).value || '', url: (document.getElementById(`url-${n}`) || {}).value || '#', img, age: (document.getElementById(`age-${n}`) || {}).value || '' });
@@ -418,6 +477,41 @@ function buildHTML() {
                 <tr>
                   <td style="padding:0; border-bottom:1px solid #edebe9; line-height:0; font-size:0;">
                     <img src="${a.img}" width="660" alt="" style="display:block; width:100%; max-width:660px; height:auto; border:0;">
+                  </td>
+                </tr>`;
+    }
+    if (a.type === 'bloque') {
+      const subitemsHTML = a.subitems.map((item, idx) => {
+        const isLast = idx === a.subitems.length - 1;
+        const subTitleHTML = `<a href="${item.url}" target="_blank" style="color:#201f1e; text-decoration:none; mso-color-alt:windowtext; font-size:18px; font-weight:700; line-height:1.35; font-family:'Segoe UI',Arial,sans-serif;"><font color="#201f1e">${item.title}</font></a>`;
+        return `
+                    <tr>
+                      <td bgcolor="#ffffff" style="background-color:#ffffff; padding:0 24px;">
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tr>
+                            <td width="3" bgcolor="#e05500" style="background-color:#e05500; width:3px; padding:0; font-size:0; line-height:0;">&nbsp;</td>
+                            <td style="padding:14px 0 14px 16px; ${!isLast ? 'border-bottom:1px solid #f3f2f1;' : ''}">
+                              <p style="margin:0 0 6px 0; font-size:18px; font-weight:700; color:#201f1e; line-height:1.35; font-family:'Segoe UI',Arial,sans-serif;">${subTitleHTML}</p>
+                              ${item.desc ? `<p style="margin:0; font-size:15px; color:#605e5c; line-height:1.6; font-family:'Segoe UI',Arial,sans-serif;">${item.desc}</p>` : ''}
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>`;
+      }).join('');
+      return `
+                <tr>
+                  <td style="padding:0; border-bottom:1px solid #edebe9;">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td bgcolor="#fde8c8" style="background-color:#fde8c8; padding:14px 24px; border-bottom:2px solid #e05500;">
+                          <p style="margin:0; font-family:'Segoe UI',Arial,sans-serif; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:#e05500;">${a.btitle}</p>
+                        </td>
+                      </tr>
+                      ${a.bintro ? `<tr><td bgcolor="#ffffff" style="background-color:#ffffff; padding:16px 24px 8px;"><p style="margin:0; font-size:16px; color:#605e5c; line-height:1.6; font-family:'Segoe UI',Arial,sans-serif;">${a.bintro}</p></td></tr>` : ''}
+                      <tr><td bgcolor="#ffffff" style="background-color:#ffffff; padding-top:${a.bintro ? '0' : '8px'};"><table width="100%" cellpadding="0" cellspacing="0" border="0">${subitemsHTML}</table></td></tr>
+                      <tr><td bgcolor="#ffffff" style="background-color:#ffffff; padding:8px 0 0;"></td></tr>
+                    </table>
                   </td>
                 </tr>`;
     }
